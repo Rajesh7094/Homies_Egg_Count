@@ -76,15 +76,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { success: false, error: 'Your account is disabled. Contact Admin.' };
     }
 
+    const effectivePass = target.password || (target as any).password_hash;
+
     // Admin password check accepts both rajesh123 and rajesh@123
     const isTargetAdmin = target.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
     if (isTargetAdmin) {
-      const isPassValid = password === 'rajesh123' || password === 'rajesh@123' || password === target.password;
+      const isPassValid = password === 'rajesh123' || password === 'rajesh@123' || password === effectivePass;
       if (!isPassValid) {
         return { success: false, error: 'Incorrect password. Please try again.' };
       }
     } else {
-      if (!target.password || target.password !== password) {
+      if (!effectivePass || effectivePass !== password) {
         return { success: false, error: 'Incorrect password. Please try again.' };
       }
     }
