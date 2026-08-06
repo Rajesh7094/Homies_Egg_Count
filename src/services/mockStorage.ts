@@ -1,11 +1,11 @@
 import type { User, EggBatch, ConsumptionRecord, ActivityLog, EmailNotification } from '../types';
 import { supabase, isSupabaseConfigured } from './supabase';
 
-const USERS_KEY = 'bachelor_egg_users_v2';
-const BATCHES_KEY = 'bachelor_egg_batches_v2';
-const CONSUMPTION_KEY = 'bachelor_egg_consumption_v2';
-const ACTIVITIES_KEY = 'bachelor_egg_activities_v2';
-const EMAILS_KEY = 'bachelor_egg_emails_v2';
+const USERS_KEY = 'bachelor_egg_users_v3';
+const BATCHES_KEY = 'bachelor_egg_batches_v3';
+const CONSUMPTION_KEY = 'bachelor_egg_consumption_v3';
+const ACTIVITIES_KEY = 'bachelor_egg_activities_v3';
+const EMAILS_KEY = 'bachelor_egg_emails_v3';
 
 export const ADMIN_EMAIL = 'rajesherode2004@gmail.com';
 
