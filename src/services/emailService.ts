@@ -45,7 +45,7 @@ export const sendEggFinishedEmail = async (payload: EmailPayload): Promise<{ suc
           'Authorization': `Bearer ${resendApiKey}`,
         },
         body: JSON.stringify({
-          from: 'Bachelor Egg Manager <notifications@resend.dev>',
+          from: 'Bachelor Egg Manager <onboarding@resend.dev>',
           to: [admin_email || ADMIN_EMAIL],
           subject: subject,
           text: body,
