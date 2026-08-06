@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { User } from '../types';
-import { mockStorage } from '../services/mockStorage';
+import { mockStorage, ADMIN_EMAIL } from '../services/mockStorage';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -75,9 +75,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (target.status === 'inactive') {
       return { success: false, error: 'Your account is disabled. Contact Admin.' };
     }
-    // Always require password — users without a stored password cannot login
-    if (!target.password || target.password !== password) {
-      return { success: false, error: 'Incorrect password. Please try again.' };
+
+    // Admin password check accepts both rajesh123 and rajesh@123
+    const isTargetAdmin = target.email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+    if (isTargetAdmin) {
+      const isPassValid = password === 'rajesh123' || password === 'rajesh@123' || password === target.password;
+      if (!isPassValid) {
+        return { success: false, error: 'Incorrect password. Please try again.' };
+      }
+    } else {
+      if (!target.password || target.password !== password) {
+        return { success: false, error: 'Incorrect password. Please try again.' };
+      }
     }
 
     setCurrentUser(target);
