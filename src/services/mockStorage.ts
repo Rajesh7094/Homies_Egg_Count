@@ -79,7 +79,11 @@ class MockStorageService {
       ]);
 
       if (usersRes.data && usersRes.data.length > 0) {
-        localStorage.setItem(USERS_KEY, JSON.stringify(usersRes.data));
+        const mappedUsers = usersRes.data.map((u: any) => ({
+          ...u,
+          password: u.password_hash || u.password || (u.email === ADMIN_EMAIL ? 'rajesh123' : 'egg@2024'),
+        }));
+        localStorage.setItem(USERS_KEY, JSON.stringify(mappedUsers));
       }
       if (batchesRes.data) {
         localStorage.setItem(BATCHES_KEY, JSON.stringify(batchesRes.data));
